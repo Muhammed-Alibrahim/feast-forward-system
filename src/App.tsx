@@ -12,6 +12,9 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import MenuEditor from "./pages/dashboard/MenuEditor";
 import Browse from "./pages/customer/Browse";
 import RestaurantDetail from "./pages/customer/RestaurantDetail";
+import Favorites from "./pages/customer/Favorites";
+import Orders from "./pages/customer/Orders";
+import AdminDashboard from "./pages/admin/AdminDashboard";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +36,11 @@ const App = () => (
           {/* Customer Routes */}
           <Route path="/browse" element={<Browse />} />
           <Route path="/restaurant/:id" element={<RestaurantDetail />} />
+          <Route path="/favorites" element={<Favorites />} />
+          <Route path="/orders" element={<Orders />} />
+          
+          {/* Admin Routes */}
+          <Route path="/admin" element={<AdminDashboard />} />
           
           <Route path="*" element={<NotFound />} />
         </Routes>

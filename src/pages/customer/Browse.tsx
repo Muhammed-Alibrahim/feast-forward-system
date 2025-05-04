@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search, MapPin, Star } from "lucide-react";
 
-// Mock data for restaurant listings
+// Mock data for restaurant listings (expanded)
 const MOCK_RESTAURANTS = [
   {
     id: "1",
@@ -40,6 +40,38 @@ const MOCK_RESTAURANTS = [
     location: "South Street",
     image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4",
   },
+  {
+    id: "5",
+    name: "French Bistro",
+    cuisine: "French",
+    rating: 4.8,
+    location: "Downtown",
+    image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0",
+  },
+  {
+    id: "6",
+    name: "Thai Spice",
+    cuisine: "Thai",
+    rating: 4.4,
+    location: "Eastside Plaza",
+    image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836",
+  },
+  {
+    id: "7",
+    name: "Pizza Palace",
+    cuisine: "Italian",
+    rating: 4.1,
+    location: "Central District",
+    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38",
+  },
+  {
+    id: "8",
+    name: "Indian Curry House",
+    cuisine: "Indian",
+    rating: 4.6,
+    location: "Riverside",
+    image: "https://images.unsplash.com/photo-1585937421612-70a008356fbe",
+  }
 ];
 
 const Browse = () => {
