@@ -10,6 +10,8 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Dashboard from "./pages/dashboard/Dashboard";
 import MenuEditor from "./pages/dashboard/MenuEditor";
+import Browse from "./pages/customer/Browse";
+import RestaurantDetail from "./pages/customer/RestaurantDetail";
 
 const queryClient = new QueryClient();
 
@@ -23,8 +25,15 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          
+          {/* Restaurant Owner Routes */}
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/menu/edit/:id" element={<MenuEditor />} />
+          
+          {/* Customer Routes */}
+          <Route path="/browse" element={<Browse />} />
+          <Route path="/restaurant/:id" element={<RestaurantDetail />} />
+          
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

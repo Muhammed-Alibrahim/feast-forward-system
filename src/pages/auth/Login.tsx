@@ -29,15 +29,27 @@ const Login = () => {
     
     try {
       // This would be replaced with actual Firebase authentication
-      // For now, we'll simulate a successful login
+      // For now, we'll simulate a successful login and userType identification
       await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Simulate determining user type from backend
+      // In a real app, this would come from your auth provider
+      const userType = email.includes("owner") ? "owner" : "customer";
+      
+      // Store user type in local storage for demonstration
+      localStorage.setItem("userType", userType);
       
       toast({
         title: "Success",
         description: "Logged in successfully",
       });
       
-      navigate("/dashboard");
+      // Redirect based on user type
+      if (userType === "owner") {
+        navigate("/dashboard");
+      } else {
+        navigate("/browse"); // We'll create this page for customers
+      }
     } catch (error) {
       toast({
         title: "Error",
@@ -111,6 +123,16 @@ const Login = () => {
             </CardFooter>
           </form>
         </Card>
+
+        <div className="text-center">
+          <p className="text-sm text-gray-600">
+            For demo purposes:
+          </p>
+          <p className="text-xs text-gray-500">
+            Use any email with "owner" to login as restaurant owner<br />
+            Use any other email to login as customer
+          </p>
+        </div>
       </div>
     </div>
   );

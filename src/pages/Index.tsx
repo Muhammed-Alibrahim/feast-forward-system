@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { ChevronRight, Home, Menu, ShoppingCart } from "lucide-react";
+import { ChevronRight, Home, Menu as MenuIcon, ShoppingCart } from "lucide-react";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const Index = () => {
       <header className="bg-white border-b sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Menu className="h-6 w-6 text-primary" />
+            <MenuIcon className="h-6 w-6 text-primary" />
             <h1 className="text-xl font-bold">MenuMaster</h1>
           </div>
           
@@ -46,8 +46,8 @@ const Index = () => {
                 Start Free Trial
                 <ChevronRight className="ml-2 h-4 w-4" />
               </Button>
-              <Button variant="outline" size="lg">
-                Watch Demo
+              <Button variant="outline" size="lg" onClick={() => navigate("/browse")}>
+                Browse Menus
               </Button>
             </div>
           </div>
@@ -68,7 +68,7 @@ const Index = () => {
           
           <div className="grid md:grid-cols-3 gap-8">
             <FeatureCard 
-              icon={<Menu />}
+              icon={<MenuIcon />}
               title="Easy Menu Management"
               description="Create and update your menu items easily with our intuitive drag-and-drop editor."
             />

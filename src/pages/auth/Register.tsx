@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { toast } from "@/components/ui/use-toast";
 
 const Register = () => {
@@ -15,7 +16,8 @@ const Register = () => {
     fullName: "",
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
+    userType: "owner" // Default to restaurant owner
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,14 +28,30 @@ const Register = () => {
     }));
   };
 
+  const handleRadioChange = (value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      userType: value
+    }));
+  };
+
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Basic validation
-    if (!formData.restaurantName || !formData.fullName || !formData.email || !formData.password) {
+    if (!formData.fullName || !formData.email || !formData.password) {
       toast({
         title: "Error",
-        description: "Please fill in all fields",
+        description: "Please fill in all required fields",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (formData.userType === "owner" && !formData.restaurantName) {
+      toast({
+        title: "Error",
+        description: "Restaurant name is required for owners",
         variant: "destructive",
       });
       return;
@@ -95,21 +113,42 @@ const Register = () => {
             <CardHeader>
               <CardTitle className="text-2xl">Register</CardTitle>
               <CardDescription>
-                Create a new account to manage your restaurant's digital menu
+                Create a new account to access MenuMaster
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="restaurantName">Restaurant Name</Label>
-                <Input
-                  id="restaurantName"
-                  name="restaurantName"
-                  placeholder="Your Restaurant"
-                  value={formData.restaurantName}
-                  onChange={handleChange}
-                  required
-                />
+                <Label>I am a:</Label>
+                <RadioGroup 
+                  value={formData.userType} 
+                  onValueChange={handleRadioChange}
+                  className="flex space-x-4"
+                >
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="owner" id="owner" />
+                    <Label htmlFor="owner">Restaurant Owner</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="customer" id="customer" />
+                    <Label htmlFor="customer">Customer</Label>
+                  </div>
+                </RadioGroup>
               </div>
+
+              {formData.userType === "owner" && (
+                <div className="space-y-2">
+                  <Label htmlFor="restaurantName">Restaurant Name</Label>
+                  <Input
+                    id="restaurantName"
+                    name="restaurantName"
+                    placeholder="Your Restaurant"
+                    value={formData.restaurantName}
+                    onChange={handleChange}
+                    required={formData.userType === "owner"}
+                  />
+                </div>
+              )}
+              
               <div className="space-y-2">
                 <Label htmlFor="fullName">Full Name</Label>
                 <Input
